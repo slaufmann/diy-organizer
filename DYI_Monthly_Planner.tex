@@ -72,26 +72,14 @@
 \newcommand{\NoteColumn}[4]{%
 	\multirow{41}{\NoteColWidthMP}{%
 		\begin{minipage}{\NoteColWidthMP}%
-			\makebox[0pt][l]{\smash[b]{\color{WriteBgSec}\rule[-24\baselineskip]{1em}{25\baselineskip}}}%
+			\makebox[0pt][l]{\smash[b]{\color{WriteBgSec}\rule[-38\baselineskip]{1em}{39\baselineskip}}}%
 			{\color{WriteBgMain}\raggedright
 				\setcounter{NotesColumnRows}{0}%
-				\whiledo{\value{NotesColumnRows}<25}{%
+				\whiledo{\value{NotesColumnRows}<39}{%
 					\rule{\NoteColWidthMP}{\arrayrulewidth}
 					\stepcounter{NotesColumnRows}
 				}%
 			}%
-		\end{minipage}%
-		\break
-		% previous month mini calendar
-		\begin{minipage}{\NoteColWidthMP}%
-			\renewcommand{\arraystretch}{0.8}
-			\MonthMiniCalOnMonthlyPlanner{#1}{#2}
-		\end{minipage}%
-		\break
-		% next month mini calendar
-		\begin{minipage}{\NoteColWidthMP}%
-			\renewcommand{\arraystretch}{0.8}
-			\MonthMiniCalOnMonthlyPlanner{#3}{#4}
 		\end{minipage}%
 		\break \vspace{4.6pt} % push it to the top
 	}%
