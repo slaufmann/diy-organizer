@@ -18,19 +18,19 @@ import locale
 # User configuration:
 
 # Year to generate for
-year = 2009
+year = 2020
 
 # Locale -- uncomment one only, use utf-8 encoding ONLY
 #
-locale.setlocale(locale.LC_ALL, 'en_AU.utf-8')      # Australia
+#locale.setlocale(locale.LC_ALL, 'en_AU.utf-8')      # Australia
 #locale.setlocale(locale.LC_ALL, 'en_GB.utf-8')      # Great Britain
 #locale.setlocale(locale.LC_ALL, 'fr_FR.utf-8')      # France
-#locale.setlocale(locale.LC_ALL, 'de_DE.utf-8')      # Deuchland
+locale.setlocale(locale.LC_ALL, 'de_DE.utf-8')      # Deuchland
 #locale.setlocale(locale.LC_ALL, 'es_ES.utf-8')      # Espaniol
 
 # Define "Week" and "Notes" words, being used in the Weekly Planner
-Week_locale = 'Week'
-Notes_locale = 'Notes'
+Week_locale = 'Woche'
+Notes_locale = 'Notizen'
 
 # END user configuration -- do _NOT_ change anything below
 #------------------------------------------------------------------------------
