@@ -141,7 +141,7 @@
 % - #2-5 are passed as #1-4 to \NoteColumn (see def)
 % - #6   tabular layout for current month: \MP<Mon>Left
 \newcommand{\MPLeftPage}[6]{%
-	{\bfseries\Huge #1\vstrut[-0.5em]{1.4em}}\par
+	{\bfseries\Huge\color{HeadFontMonthly} #1\vstrut[-0.5em]{1.4em}}\par
 	\nointerlineskip
 	\begin{tabular*}{\textwidth}{NMMO}
 		\rowcolor{HeadMainBgMP}%
@@ -160,7 +160,7 @@
 % takes 1 parameters:
 % - #1    tabular layout for current month: \MP<Mon>Right
 \newcommand{\MPRightPage}[1]{%
-	\hfill{\bfseries\Huge\MyYear\vstrut[-0.5em]{1.4em}}\par
+	\hfill{\bfseries\Huge\color{HeadFontMonthly}\MyYear\vstrut[-0.5em]{1.4em}}\par
 	\nointerlineskip
 
 	\begin{tabular*}{\textwidth}{MMMO}
