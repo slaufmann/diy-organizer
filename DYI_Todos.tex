@@ -10,98 +10,77 @@
 
 % Settings-----------------------------------------------------------
 
-% Space partitioning
-%   |<--textwidth-------------------------------------------------------------------------------->|
-%   |<--DayFillerTotWidthWP------------------------------------------>|<--NotesFillerTotWidthWP-->|
-%   |<--DayFillerWidthWP-------------------------->|<-DayFillerSepWP->|<--NotesFillerTotWidthWP-->|
-%   |<-HourBondingBoxWP->|<-DayFillerRulerWidthWP->|<-DayFillerSepWP->|<--NotesFillerTotWidthWP-->|
-\newlength{\DayFillerTotWidthTodo}
-\setlength{\DayFillerTotWidthTodo}{( \textwidth * 2 ) /3}
-\newlength{\DayFillerSepTodo}
-\setlength{\DayFillerSepTodo}{1em}
-\newlength{\DayFillerWidthTodo}
-\setlength{\DayFillerWidthTodo}{\DayFillerTotWidthTodo - \DayFillerSepTodo}
-\newlength{\DayFillerRulerWidthTodo}
-\setlength{\DayFillerRulerWidthTodo}{\DayFillerWidthTodo}
-\newlength{\NotesFillerTotWidthTodo}
-\setlength{\NotesFillerTotWidthTodo}{\textwidth - \DayFillerTotWidthTodo}
-
-% Notes entry in Todo sheets
-\newcommand{\NotesTodo}{%
-	\makebox[0pt][l]{\smash[b]{\color{WriteBgDay}\rule[0.4\baselineskip]{\DayFillerWidthTodo}{0.5\baselineskip}}}%
-	\parbox[t]{\DayFillerTotWidthTodo}{\large\Notes\hrulefill}%
-	\setlength{\unitlength}{1mm}%
-        \begin{picture}(40,8)
-                \put(20,0){\oval[2](40,8)[t]}
-                \put(1,0){\color{SymbMainWeek}\large\ding{50}}
-                \put(36,0){\color{SymbMainWeek}\large\ding{51}}
-        \end{picture}\hspace{\fill}\par%
-	\renewcommand{\arraystretch}{0.55}%
-	\begin{tabular*}{\textwidth}[t]{@{}p{\DayFillerWidthTodo}@{\hspace*{\DayFillerSepTodo}}p{\NotesFillerTotWidthTodo}@{}}%
-	% the \color command mangles the spacing, typeset an \vstrut to fix and align with facing page
-	\vstrut{13.5pt}{\color{WriteBgMain}\rule{\DayFillerWidthTodo}{0.5pt}} & \vstrut{13.5pt}{\color{WriteBgMain}\rule{\NotesFillerTotWidthTodo}{0.5pt}} \\
-	{\color{WriteBgMain}\rule{\DayFillerWidthTodo}{0.5pt}} & {\color{WriteBgMain}\rule{\NotesFillerTotWidthTodo}{0.5pt}} \\
-	\end{tabular*}}
-
-% percentage (0.0 - 1.0) taken by the '*Todo' column out of the full quarter textwidth
-\newcommand{\percentTodoColWidth}{0.995}
-% reminder, easier to set explicitly, must add to 1.0
-\newcommand{\percentTodoColWhite}{0.1}
-
-% Width of '*Todos' column
-%\newlength{\TodoColWidth}
-%\setlength{\TodoColWidth}{\textwidth * \real{\percentTodoColWidth}}
-%\newlength{\TodoColSkip}
-%\setlength{\TodoColSkip}{\textwidth * \real{\percentTodoColWhite}}
-% Column Type for Todos
-%\newcolumntype{T}{>{\centering}p{\TodoColWidth}@{\hspace\TodoColSkip}}
-
-% Note column on Todo sheet
-% - hand tunned by trial and error, currently not posssible otherwise:
-%   the heigh of the multirow is set up at the current evaluation based on current settings (font, etc)
-% - so: artificially reserve (5 rows * 8 height) + 1 rows at current row heigh then build the minipage
-% - last "8" reserved for building the previous/next months calendars
-\newcounter{TodoNotesColumnRows}%
-\newcommand{\TodoNoteColumn}{%
-	\multirow{41}{\TodoColWidth}{%
-		\begin{minipage}{\TodoColWidth}%
-			\makebox[0pt][l]{\smash[b]{\color{WriteBgDay}\rule[-38\baselineskip]{1em}{39\baselineskip}}}%
-			{\color{WriteBgDay}\raggedright
-				\setcounter{TodoNotesColumnRows}{0}%
-				\whiledo{\value{TodoNotesColumnRows}<39}{%
-					\rule{\TodoColWidth}{\arrayrulewidth}
-					\stepcounter{TodoNotesColumnRows}
-				}%
-			}%
-		\end{minipage}%
-		\break \vspace{4.6pt} % push it to the top
-	}%
+\newcommand{\TodoProjectHeader}{%
+	% shading bar
+	\makebox[0pt][l]{\smash[b]{\color{WriteBgDay}\rule[0.4\baselineskip]{1.09\textwidth}{0.5\baselineskip}}}%
+	% Notes: the parbox leaves the current insertion point (for the next box)
+	%        at the start of the Notes 'column' (also align text left)
+	%        so it joins with the Notes header
+	\parbox[t]{\linewidth}{Projekt:}%
 }
 
 \newlength{\TodoColWidth}
 \setlength{\TodoColWidth}{.45\textwidth}
-\newcolumntype{T}{>{\centering}p{\TodoColWidth}}
+
+\newcommand{\TodoNoteRow}{%
+	\cellcolor{WriteBgDay}\hspace{1.5em} & \vstrut{1em}\hspace{-1pt}{\color{WriteBgDay}\rule{\TodoColWidth}{\arrayrulewidth}}\\
+}
 
 \newcommand{\TodoTable}{
-	\begin{tabular*}{\linewidth}{c}
+	\begin{tabular*}{\linewidth}{cc}
 		\rowcolor{SymbMainWeek}%
 		% \makebox[1em] centers \ding{93} on the gray left vertical bar below, see \NoteColumn
-		\bfseries\vstrut{1em}{\color{white}\makebox[1.2em]{\ding{51}}\hspace{.7em}\ding{50}\hspace{.81\TodoColWidth}} \\
+		\bfseries\vstrut{1em}{\color{white}\makebox[1.5em]{\ding{51}}} & \bfseries\vstrut{1em}{\color{white}\hspace{.5em}\ding{50}\hspace{.81\TodoColWidth}}\\
 		\rowcolor{white}
-		\TodoNoteColumn
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
+		\TodoNoteRow
 	\end{tabular*}
 }
 
 % Left page
 \newcommand{\LeftPageTodo}{%
-	{\color{SymbMainWeek}\bfseries\Large Todo\vstrut[-0.2em]{1.2em}}\par
+	{\color{SymbMainWeek}\bfseries\Large Aufgaben\vstrut[-0.2em]{1.2em}}\par
 	\nointerlineskip
-	\medskip
+	\bigskip
 	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
 		\TodoTable
 	\end{minipage}
 	\hfill
 	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
+		\TodoTable
+	\end{minipage}
+	\newline
+	\vstrut{1em}
+	\newline
+	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
+		\TodoTable
+	\end{minipage}
+	\hfill
+	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
 		\TodoTable
 	\end{minipage}
 	\clearpage
@@ -110,7 +89,6 @@
 % Right page
 \newcommand{\RightPageTodo}{%
 	{\hspace*{\fill}\color{SymbMainWeek}\bfseries\Large Todo\vstrut[-0.2em]{1.2em}}\par
-	\NotesTodo\vspace*{\fill}%
 	\clearpage
 }
 
