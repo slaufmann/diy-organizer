@@ -9,7 +9,7 @@
 %         Monday Day Month(abbr)    [Notes] || Friday Day Month(abbr)   [Notes]
 %         Tuesday Day Month(abbr)   [     ] || Saturday Day Month(abbr) [     ]
 %         Wednesday Day Month(abbr) [     ] || Sunday Day Month(abbr)   [     ]
-%         Thursday Day Month(abbr)  [     ] || Months MiniCals          Summary
+%         Thursday Day Month(abbr)  [     ] || Notes                    Summary
 
 % Settings-----------------------------------------------------------
 
@@ -31,16 +31,6 @@
 \setlength{\DayFillerRulerWidthWP}{\DayFillerWidthWP - \HourBondingBoxWP}
 \newlength{\NotesFillerTotWidthWP}
 \setlength{\NotesFillerTotWidthWP}{\textwidth - \DayFillerTotWidthWP}
-% minicalendar space partitioning
-%   |<-DayFillerWidthWP-------------------------------------->|
-%   |<-PrevMonth->|<-sep->|<-CurrMonth->|<-sep->|<-NextMonth->|
-\newlength{\MinicalSepWP}
-\setlength{\MinicalSepWP}{2ex}
-\newlength{\MinicalWidthWP}
-\setlength{\MinicalWidthWP}{( \DayFillerWidthWP - 2 \MinicalSepWP ) / 3}
-%   column width in Minical
-\newlength{\MinicalColWidthWP}
-\setlength{\MinicalColWidthWP}{\MinicalWidthWP / 7}
 
 % Day entry contents on Weekly Planner
 % - one row:
@@ -67,25 +57,6 @@
 	\DayFillerRowWP{18}\break%
 	\DayFillerRowWP{20}}
 
-% Monthly minicalendars on Weekly Planner
-% Column types I,J,K
-% - weeekdays
-\newcolumntype{I}{>{\hfill\bfseries\tiny}p{\MinicalColWidthWP}@{\extracolsep\fill}}
-% - Saturday
-\newcolumntype{J}{>{\hfill\bfseries\tiny\vstrut{0pt}\color{WeekendDay}}p{\MinicalColWidthWP}@{\extracolsep\fill}}
-% - Sunday (last column)
-\newcolumntype{K}{>{\hfill\bfseries\tiny\vstrut{0pt}\color{WeekendDay}}p{\MinicalColWidthWP}}
-% - Monthly Minicals, center the weekdays headline
-\newcommand{\myCentering}[1]{\hspace*{\fill}#1\hspace*{\fill}}
-\newcommand{\MonthMiniCalWP}[2]{%
-	{\renewcommand{\arraystretch}{0.6}%
-	\begin{tabular*}{\MinicalWidthWP}[t]{@{}*{5}{I}JK@{}}
-	\multicolumn{7}{>{\columncolor{HeadMainBg}}c}{\scriptsize\vstrut{1.1em}\bfseries\color{white}#1} \\
-	\rowcolor{HeadSubBg}%
-	\WkdayTblRowA{\myCentering} \\
-	#2
-	\end{tabular*}}}
-
 % Day entry in Weekly Planner
 \newcommand{\DayWP}[1]{%
 	% gray shading bar
@@ -105,7 +76,7 @@
 	\vspace{1ex}}
 
 % Notes entry in Weekly Planner (right page, bottom section)
-\newcommand{\NotesWP}[6]{%
+\newcommand{\NotesWP}{%
 	\makebox[0pt][l]{\smash[b]{\color{WriteBgDay}\rule[0.4\baselineskip]{\DayFillerWidthWP}{0.5\baselineskip}}}%
 	\parbox[t]{\DayFillerTotWidthWP}{\large\Notes\hrulefill}%
 	\setlength{\unitlength}{1mm}%
@@ -147,7 +118,7 @@
 	\DayWP{\Friday{} #1}\par
 	\DayWP{\Saturday{} #2}\par
 	\DayWP{\Sunday{} #3}\par
-	\NotesWP{#4}{#5}{#6}{#7}{#8}{#9}\vspace*{\fill}%
+	\NotesWP\vspace*{\fill}%
 	\clearpage}
 
 % Start--------------------------------------------------------------
