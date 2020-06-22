@@ -12,7 +12,7 @@
 
 \newcommand{\TodoProjectHeader}{%
 	% shading bar
-	\makebox[0pt][l]{\smash[b]{\color{WriteBgDay}\rule[0.4\baselineskip]{1.09\textwidth}{0.5\baselineskip}}}%
+	\makebox[0pt][l]{\smash[b]{\color{WriteBgDay}\rule[0.4\baselineskip]{1.09\textwidth}{0.4\baselineskip}}}%
 	% Notes: the parbox leaves the current insertion point (for the next box)
 	%        at the start of the Notes 'column' (also align text left)
 	%        so it joins with the Notes header
@@ -32,6 +32,7 @@
 		% \makebox[1em] centers \ding{93} on the gray left vertical bar below, see \NoteColumn
 		\bfseries\vstrut{1em}{\color{white}\makebox[1.5em]{\ding{51}}} & \bfseries\vstrut{1em}{\color{white}\hspace{.5em}\ding{50}\hspace{.81\TodoColWidth}}\\
 		\rowcolor{white}
+		\vstrut{.1em} & \\
 		\TodoNoteRow
 		\TodoNoteRow
 		\TodoNoteRow
@@ -88,7 +89,34 @@
 
 % Right page
 \newcommand{\RightPageTodo}{%
-	{\hspace*{\fill}\color{SymbMainWeek}\bfseries\Large Todo\vstrut[-0.2em]{1.2em}}\par
+	{\hspace*{\fill}\color{SymbMainWeek}\bfseries\Large Aufgaben\vstrut[-0.2em]{1.2em}}\par
+	\nointerlineskip
+	\bigskip
+	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
+		\TodoTable
+	\end{minipage}
+	\hfill
+	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
+		\TodoTable
+	\end{minipage}
+	\newline
+	\vstrut{1em}
+	\newline
+	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
+		\TodoTable
+	\end{minipage}
+	\hfill
+	\begin{minipage}{.45\textwidth}
+		\TodoProjectHeader
+		\smallskip
+		\TodoTable
+	\end{minipage}
 	\clearpage
 }
 
