@@ -394,11 +394,9 @@ def write_out_WP_macros(year, file):
             right_pg_header = '\RightPageHeaderWP{' + calendar.month_abbr[12] + ' ' + str(other_y) + ' -- ' + calendar.month_abbr[1] + ' ' + str(curr_y) +'}'
 
         right_pg_macro = '\RightPageWP'
+        right_pg_macro += '{' + str(w) + '}'
         for d in range(4,7):
             right_pg_macro += '{' + str(weeks[w][d].day) + ' ' + calendar.month_abbr[weeks[w][d].month] + '}'
-        right_pg_macro += '{' + prev_month_name + '}' + '{' + prev_month_table + '}'
-        right_pg_macro += '{' + curr_month_name + '}' + '{' + curr_month_table + '}'
-        right_pg_macro += '{' + next_month_name + '}' + '{' + next_month_table + '}'
 
         WP_macros_FH.writelines(left_pg_macro + '\n')
         WP_macros_FH.writelines(right_pg_header + '\n')

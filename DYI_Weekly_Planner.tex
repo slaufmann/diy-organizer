@@ -114,12 +114,25 @@
 	{\hspace*{\fill}\color{SymbMainWeek}\bfseries\Large #1\vstrut[-0.2em]{1.2em}}\par%
 	\nointerlineskip}
 
-\newcommand{\RightPageWP}[9]{%
-	\DayWP{\Friday{} #1}\par
-	\DayWP{\Saturday{} #2}\par
-	\DayWP{\Sunday{} #3}\par
-	\NotesWP\vspace*{\fill}%
-	\clearpage}
+\newcommand{\RightPageWP}[4]{%
+	\DayWP{\Friday{} #2}\par
+	\DayWP{\Saturday{} #3}\par
+	\DayWP{\Sunday{} #4}\par
+	\ifthenelse{#1>24}{%
+		\ifthenelse{\isodd{#1}}{%
+			\vspace{.5em}%
+			\hspace{\HourBondingBoxWP}%
+			\includegraphics[height=4.5cm]{figures/#1a}%
+			\hfill%
+			\includegraphics[height=4.5cm]{figures/#1b}%
+		}{%
+			\NotesWP\vspace*{\fill}%
+		}%
+	}{%
+		\NotesWP\vspace*{\fill}%
+	}%
+	\clearpage%
+}
 
 % Start--------------------------------------------------------------
 
